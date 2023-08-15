@@ -1,11 +1,12 @@
 ﻿using Example.Project.Dto.ExampleDto;
+using Example.Project.ToolKit.Responses;
 
 namespace Example.Project.Service.ExampleServices
 {
     public interface IexampleService
     {
-        TestDto GetSingleData();
-        List<TestDto> GetAllData();
-        int InsertData(TestDto model);
+        EntityResponse<TestDto> GetSingleData(string id);
+        EntityListResponse<TestDto> GetAllData();
+        PrimitiveResponse InsertData(TestDto model);
     }
 }

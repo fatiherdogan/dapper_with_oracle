@@ -1,4 +1,9 @@
 
+using Example.Project.Repository.Context;
+using Example.Project.Repository.Repository;
+using Example.Project.Service.ExampleServices;
+using Example.Project.ToolKit.Settings;
+
 namespace Example.Project.API
 {
     public class Program
@@ -7,16 +12,18 @@ namespace Example.Project.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddTransient<IexampleContext, exampleContext>();
+            builder.Services.AddTransient<IexampleRepository, exampleRepository>();
+            builder.Services.AddTransient<ISettingService, WebConfigSettingService>();
+            builder.Services.AddTransient<IexampleService, exampleService>();
+
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                
